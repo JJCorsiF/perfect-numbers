@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class PerfectNumberCheckerTest {
 
-    PerfectNumberChecker perfectNumberChecker;
+    private PerfectNumberChecker perfectNumberChecker;
 
     @BeforeEach
     void init() {
