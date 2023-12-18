@@ -32,16 +32,15 @@ public class PositiveNumber {
     List<BigInteger> divisorsExceptSelf() {
         List<BigInteger> divisors = new ArrayList<>();
 
-        int intValue = value.intValue();
-        final int SMALLEST_EVEN_DIVISOR = 2;
-
-        if (intValue < SMALLEST_EVEN_DIVISOR) {
+        if (value.compareTo(BigInteger.TWO) < 0) {
             return divisors;
         }
 
         divisors.add(BigInteger.ONE);
 
-        for (int n = SMALLEST_EVEN_DIVISOR; n * n <= intValue; n++) {
+        int intValue = value.intValue();
+
+        for (int n = BigInteger.TWO.intValue(); n * n <= intValue; n++) {
             if (intValue % n == 0) {
                 BigInteger divisor = BigInteger.valueOf(n);
                 divisors.add(divisor);
