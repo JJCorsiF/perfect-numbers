@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +31,7 @@ public class PerfectNumberController {
         return response;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(value = "/number/{number}/isPerfect", produces={"application/json"})
     public Map<String, String> isPerfect(@PathVariable BigInteger number) {
         try {
@@ -41,6 +43,7 @@ public class PerfectNumberController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(value = "/perfectNumbersBetween/{startingNumber}/{endingNumber}", produces={"application/json"})
     public String findPerfectBetween(@PathVariable BigInteger startingNumber, @PathVariable BigInteger endingNumber) {
         try {
