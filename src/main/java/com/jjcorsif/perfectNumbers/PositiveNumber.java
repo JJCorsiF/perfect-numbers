@@ -9,10 +9,18 @@ public class PositiveNumber {
     private final BigInteger value;
 
     PositiveNumber(BigInteger value) throws NotAPositiveNumberException {
-        if (isNotPositive(value)) {
+        if (!isPositive(value)) {
             throw new NotAPositiveNumberException("Perfect numbers must be positive integers.");
         }
         this.value = value;
+    }
+
+    BigInteger aliquotSum() {
+        return divisorsExceptSelf().stream().reduce(BigInteger.ZERO, BigInteger::add);
+    }
+
+    boolean isPerfectNumber() {
+        return !isPerfectSquare() && value.equals(aliquotSum());
     }
 
     boolean isPerfectSquare() {
@@ -24,24 +32,28 @@ public class PositiveNumber {
     List<BigInteger> divisorsExceptSelf() {
         List<BigInteger> divisors = new ArrayList<>();
 
-        if (value.intValue() < 2) {
+        int intValue = value.intValue();
+        final int SMALLEST_EVEN_DIVISOR = 2;
+
+        if (intValue < SMALLEST_EVEN_DIVISOR) {
             return divisors;
         }
 
         divisors.add(BigInteger.ONE);
 
-        for (int n = 2; n * n <= value.intValue(); n++) {
-            if (value.intValue() % n == 0) {
-                divisors.add(BigInteger.valueOf(n));
-                divisors.add(BigInteger.valueOf(value.intValue() / n));
+        for (int n = SMALLEST_EVEN_DIVISOR; n * n <= intValue; n++) {
+            if (intValue % n == 0) {
+                BigInteger divisor = BigInteger.valueOf(n);
+                divisors.add(divisor);
+                divisors.add(value.divide(divisor));
             }
         }
 
         return divisors;
     }
 
-    private static boolean isNotPositive(BigInteger aNumber) {
-        return aNumber.intValue() < 1;
+    private static boolean isPositive(BigInteger aNumber) {
+        return aNumber.compareTo(BigInteger.ZERO) > 0;
     }
 
 }
