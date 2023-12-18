@@ -21,7 +21,7 @@ public class PerfectNumberController {
 
     @GetMapping(produces={"application/json"})
     public Map<String, String> index() {
-        Map response = new HashMap<String, String>();
+        Map<String, String> response = new HashMap<>();
         response.put("number/{number}/isPerfect", "To check if a given number is a perfect number");
         response.put(
             "perfectNumbersBetween/{startingNumber}/{endingNumber}",
